@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 
-import * as bookController from "./controllers/bookController";
+import * as spaceshipController from "./controllers/spaceshipController";
+import * as locationController from "./controllers/locationController";
 
 // Our Express APP config
 const app = express();
@@ -10,12 +11,18 @@ app.set("port", process.env.PORT || 3000);
 // API Endpoints
 app.get("/", (req: Request, res: Response) => res.send("hi"))
 
-// API Endpoints
-app.get("/books", bookController.allBooks);
-app.get("/book/:id", bookController.getBook);
-app.post("/book", bookController.addBook);
-app.put("/book/:id", bookController.updateBook);
-app.delete("/book/:id", bookController.deleteBook);
+// API Endpoints for Spaceship
+app.get("/spaceship", spaceshipController.allSpaceship);
+app.get("/spaceship/:id", spaceshipController.getSpaceship);
+app.post("/spaceship", spaceshipController.addSpaceship);
+app.put("/spaceship/:id", spaceshipController.spaceshipTravel);
+app.delete("/spaceship/:id", spaceshipController.removeSpaceship);
+
+// API Endpoints for Location
+app.get("/location", locationController.allLocations);
+app.get("/location/:id", locationController.getLocation);
+app.post("/location", locationController.addLocation);
+app.delete("/location/:id", locationController.removeLocation);
 
 const server = app.listen(app.get("port"), () => {
   console.log("App is running on http://localhost:%d", app.get("port"));
